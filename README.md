@@ -1,0 +1,1 @@
+# wordpress-visual-composer-localization-plugin
