@@ -98,7 +98,10 @@ class SmartlingVisualComposerTagProcessor
             'vc_twitter',
             'vc_row',
             'vc_video',
-            
+            // todo: trans title.
+            'vc_line_chart-values',
+            'vc_progress_bar-values',
+            'vc_section-el_id'
         ];
     }
     
