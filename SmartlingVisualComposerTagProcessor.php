@@ -41,7 +41,8 @@ class SmartlingVisualComposerTagProcessor
             'vc_cta_button',
             'vc_cta_button_2',
             'vc_custom_field',
-            'vc_acf',
+            // todo: check this.
+            // 'vc_acf',
             'vc_custom_heading',
             'vc_empty_space',
             'vc_facebook',
@@ -111,7 +112,7 @@ class SmartlingVisualComposerTagProcessor
         // Copied attributes.
         foreach (static::getCopiedAttributesPatterns() as $pattern) {
             $filters[] = [
-                'pattern' => '^'.$pattern.'$',
+                'pattern' => '\-' . $pattern . '$',
                 'action'  => 'copy',
             ];
         }
@@ -341,7 +342,6 @@ class SmartlingVisualComposerTagProcessor
             'custom_google_fonts',
             'custom_css_animation',
             'class',
-            // todo: caption attr,
             'c_icon',
             'c_position',
             'controls_size',
@@ -352,7 +352,25 @@ class SmartlingVisualComposerTagProcessor
             'disable_tailoring',
             'lang',
             'vc_video-link',
-            'el_aspect'
+            'el_aspect',
+            'vc_raw_html-0',
+            'vc_raw_js-0',
+            // todo: replace on local localize.
+            'vc_basic_grid-exclude_filter',
+            // todo: process links attributes.
+            'link',
+            'i_link',
+            'btn_link',
+            'h1_link',
+            'h2_link',
+            'h3_link',
+            'h4_link',
+            'h5_link',
+            'h6_link',
+            // todo: localize categories by given names, not ids.
+            'vc_posts_slider-categories',
+            'btn_gradient_color_1',
+            'btn_gradient_color_2',
         ];
     }
     
@@ -364,6 +382,7 @@ class SmartlingVisualComposerTagProcessor
     private static function getLocalizedFilters()
     {
         return [
+            // todo: process this.
             [
                 'pattern'       => '^taxonomies',
                 'action'        => 'localize',
@@ -378,36 +397,42 @@ class SmartlingVisualComposerTagProcessor
                 'value'         => 'reference',
                 'type'          => 'category',
             ],
+            // todo: make localize.
             [
-                'pattern'       => '^posts_in',
+                'pattern'       => '^vc_basic_grid-exclude$',
+                'action'        => 'localize',
+                'serialization' => 'coma-separated',
+                'value'         => 'reference',
+                'type'          => 'category',
+            ],
+            [
+                'pattern'       => '^vc_posts_slider-posts_in$',
                 'action'        => 'localize',
                 'serialization' => 'coma-separated',
                 'value'         => 'reference',
                 'type'          => 'post',
             ],
-            // todo: check this
             [
-                'pattern'       => '^field_group',
-                'action'        => 'localize',
-                'serialization' => 'coma-separated',
-                'value'         => 'reference',
-                'type'          => 'field_group',
-            ],
-            // todo: check this: image - vc_single_image; include - vc_media_grid, vc_masonry_media_grid
-            [
-                'pattern'       => '^images|include|image',
+                'pattern'       => '\-(images|image)',
                 'action'        => 'localize',
                 'serialization' => 'coma-separated',
                 'value'         => 'reference',
                 'type'          => 'media',
-            ]
-            // todo: vc_basic_grid: exclude, exclude_filter
-            // todo: vc_btn: link
-            // todo: vc_cta: _link
-            // todo: vc_acf: field_from_{id}
-            // todo: vc_custom_heading: link
-            // todo: vc_icon: link
-            // todo: vc_posts_slider : categories
+            ],
+            [
+                'pattern'       => '^vc_masonry_media_grid-include$',
+                'action'        => 'localize',
+                'serialization' => 'coma-separated',
+                'value'         => 'reference',
+                'type'          => 'media',
+            ],
+            [
+                'pattern'       => '^vc_media_grid-include$',
+                'action'        => 'localize',
+                'serialization' => 'coma-separated',
+                'value'         => 'reference',
+                'type'          => 'media',
+            ],
         ];
     }
 }
